@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -30,5 +32,19 @@ public class BookController {
     @GetMapping("/initialIndexing")
     public void triggerInitialIndexing() {
         searchService.triggerInitialIndexing();
+    }
+
+    @PostMapping(value = "/book", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void persistBook(@RequestBody PersistBookRequest persistBookRequest) {
+        var newBookEntity = new BookEntity();
+        newBookEntity.setIsbn(persistBookRequest.isbn);
+        newBookEntity.setTitle(persistBookRequest.title);
+
+        bookRepository.save(newBookEntity);
+    }
+
+    public static class PersistBookRequest {
+        public String isbn;
+        public String title;
     }
 }
