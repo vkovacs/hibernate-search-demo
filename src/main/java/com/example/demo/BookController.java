@@ -26,4 +26,9 @@ public class BookController {
     public List<BookEntity> searchBooksByIsbn(@PathVariable String isbn) {
         return searchService.searchBookEntities(isbn);
     }
+
+    @GetMapping("/initialIndexing")
+    public void triggerInitialIndexing() {
+        searchService.triggerInitialIndexing();
+    }
 }
