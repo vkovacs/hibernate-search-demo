@@ -13,3 +13,5 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+    properties.hibernate.search.backend.directory.type: local-heap #https://discourse.hibernate.org/t/hibernate-search-6-and-spring-boot-and-testing/5340/2 and https://docs.jboss.org/hibernate/stable/search/reference/en-US/html_single/#search-configuration-directory
